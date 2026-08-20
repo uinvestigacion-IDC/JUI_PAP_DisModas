@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual del PAP · Diseño de Modas · IDC</title>
+<style>
+:root{
+  --turquesa:#e14a94; --turquesa-dark:#b5307a; --turquesa-light:#f9d4e9;
+  --azul:#0072b9; --azul-dark:#004f80; --azul-light:#cfe6f5;
+  --naranja:#f3a100; --naranja-dark:#c47d00;
+  --gris:#555553; --gris-claro:#f4f4f2; --gris-medio:#d8d8d4;
+  --crema:#fbfaf6; --blanco:#ffffff;
+  --font-display: 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Segoe UI', system-ui, sans-serif;
+  --radius:12px;
+}
+*{box-sizing:border-box; margin:0; padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body); color:var(--gris); background:var(--crema); line-height:1.65; font-size:15.5px}
+h1,h2,h3,h4{font-family:var(--font-display); color:var(--azul-dark); letter-spacing:-.02em; line-height:1.2}
+a{color:var(--turquesa-dark); text-decoration:none}
+.container{max-width:980px; margin:0 auto; padding:2rem 1.5rem}
+
+/* Header */
+.manual-header{
+  background: linear-gradient(135deg, var(--turquesa) 0%, var(--azul-dark) 100%);
+  color:white; padding:3.5rem 1.5rem 3rem; position:relative; overflow:hidden;
+}
+.manual-header::before{
+  content:""; position:absolute; inset:0;
+  background: radial-gradient(circle at 20% 30%, rgba(243,161,0,.18) 0%, transparent 40%),
+              radial-gradient(circle at 80% 70%, rgba(0,114,185,.35) 0%, transparent 50%);
+}
+.manual-header .container{position:relative; z-index:2}
+.manual-header h1{color:white; font-size:clamp(1.8rem,4.5vw,3rem); font-weight:800; margin-bottom:.6rem}
+.manual-header .lead{font-size:1.1rem; opacity:.92; max-width:720px}
+.manual-header .meta{display:flex; gap:1.5rem; margin-top:1.5rem; flex-wrap:wrap; font-size:.85rem; opacity:.85}
+
+/* Nav TOC */
+.toc{
+  background:var(--blanco); border:1px solid var(--gris-medio); border-radius:var(--radius);
+  padding:1.5rem; margin:2rem 0; box-shadow:0 4px 16px rgba(0,0,0,.06);
+  position:sticky; top:1rem; z-index:100;
+}
+.toc h3{font-size:1.05rem; margin-bottom:1rem; color:var(--turquesa-dark)}
+.toc ul{list-style:none; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:.35rem}
+.toc li a{display:block; padding:.45rem .7rem; border-radius:6px; font-size:.9rem; font-weight:600; color:var(--gris); transition:.2s}
+.toc li a:hover{background:var(--turquesa-light); color:var(--turquesa-dark)}
+.toc .badge{font-size:.65rem; text-transform:uppercase; letter-spacing:.08em; background:var(--turquesa); color:white; padding:.15rem .45rem; border-radius:4px; margin-left:.4rem}
+
+/* Sections */
+.section{padding:2.5rem 0; border-bottom:1px solid var(--gris-medio)}
+.section:last-child{border-bottom:none}
+.eyebrow{font-size:.72rem; text-transform:uppercase; letter-spacing:.2em; color:var(--turquesa); font-weight:700; margin-bottom:.6rem; display:flex; align-items:center; gap:.6rem}
+.eyebrow::before{content:""; display:inline-block; width:28px; height:2px; background:var(--turquesa)}
+.section h2{font-size:clamp(1.5rem,3vw,2.1rem); margin-bottom:1rem}
+.section h3{font-size:1.25rem; color:var(--azul); margin:1.6rem 0 .6rem}
+.section h4{font-size:1.05rem; color:var(--gris); margin:1.2rem 0 .4rem}
+
+/* Cards */
+.card{
+  background:var(--blanco); border:1px solid var(--gris-medio); border-radius:var(--radius);
+  padding:1.4rem; margin:1rem 0; box-shadow:0 2px 8px rgba(0,0,0,.04);
+}
+.card:hover{border-color:var(--turquesa); box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.card-title{font-weight:700; color:var(--azul-dark); margin-bottom:.4rem; font-size:1.05rem}
+.card-text{font-size:.94rem; color:var(--gris)}
+
+/* Tip boxes */
+.tip{
+  background:var(--azul-light); border-left:4px solid var(--azul); border-radius:0 var(--radius) var(--radius) 0;
+  padding:1rem 1.2rem; margin:1rem 0; font-size:.92rem;
+}
+.tip strong{color:var(--azul-dark)}
+.warn{
+  background:#fff3e0; border-left-color:var(--naranja);
+}
+.warn strong{color:var(--naranja-dark)}
+.ok{
+  background:#e8f5e9; border-left-color:#2e7d32;
+}
+.ok strong{color:#1b5e20}
+
+/* Tables */
+table{width:100%; border-collapse:collapse; margin:1rem 0; font-size:.92rem}
+th{background:var(--azul-dark); color:white; text-align:left; padding:.75rem 1rem; font-weight:600}
+td{padding:.65rem 1rem; border-bottom:1px solid var(--gris-medio); vertical-align:top}
+tr:hover td{background:var(--gris-claro)}
+
+/* Lists */
+ol,ul{margin-left:1.5rem; margin-bottom:1rem}
+li{margin-bottom:.35rem}
+
+/* Code / placeholder */
+.placeholder{
+  background:var(--gris-claro); border:1px dashed var(--gris-medio); border-radius:6px;
+  padding:.6rem .9rem; font-family:monospace; font-size:.85rem; color:var(--gris); display:block; margin:.4rem 0;
+}
+
+/* Checklist */
+.checklist{list-style:none; margin-left:0}
+.checklist li{padding:.5rem 0 .5rem 1.8rem; position:relative; border-bottom:1px dashed var(--gris-medio)}
+.checklist li::before{
+  content:"☐"; position:absolute; left:0; color:var(--turquesa); font-weight:700; font-size:1.1rem
+}
+
+/* Step numbers */
+.step-num{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:28px; height:28px; border-radius:50%; background:var(--turquesa); color:white;
+  font-weight:700; font-size:.8rem; margin-right:.6rem; flex-shrink:0;
+}
+
+/* Print */
+@media print{
+  .toc{display:none}
+  .manual-header{padding:1.5rem}
+  body{background:white}
+  .section{padding:1.2rem 0}
+}
+</style>
+</head>
+<body>
+
+<header class="manual-header">
+  <div class="container">
+    <h1>Manual para el desarrollo del PAP<br><span style="color:var(--naranja)">Diseño de Modas · IDC</span></h1>
+    <p class="lead">Guía práctica para llenar el formulario del Plan del Proyecto de Aplicación Profesional y desarrollar el trabajo de suficiencia profesional (Informe Final), articulando la normativa MINEDU, la Guía de Investigación e Innovación Tecnológica y las cinco líneas de investigación del programa.</p>
+    <div class="meta">
+      <span>📎 Memorando Múltiple Nº 05/JUI/IDC/2025-II</span>
+      <span>📄 Ley Nº 30512 · D.S. Nº 010-2017-MINEDU</span>
+      <span>🎨 Programa: Diseño de Modas</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+<nav class="toc">
+  <h3>Contenido del manual</h3>
+  <ul>
+    <li><a href="#parte1">Parte 1 · Cómo llenar el formulario del Plan PAP <span class="badge">10 secciones</span></a></li>
+    <li><a href="#parte2">Parte 2 · Del Plan al Informe Final <span class="badge">Suficiencia</span></a></li>
+    <li><a href="#parte3">Parte 3 · Las 5 líneas de investigación DM <span class="badge">Fichas</span></a></li>
+    <li><a href="#parte4">Parte 4 · Metodología y normativa APA 7 <span class="badge">Formato</span></a></li>
+    <li><a href="#parte5">Parte 5 · Checklist de validación <span class="badge">Entrega</span></a></li>
+  </ul>
+</nav>
+
+<!-- ==================== PARTE 1 ==================== -->
+<section class="section" id="parte1">
+  <div class="eyebrow">Parte 1</div>
+  <h2>Cómo llenar el formulario del Plan del PAP</h2>
+  <p>El <strong>Plan del Proyecto de Aplicación Profesional (PAP)</strong> es el documento previo que requiere aprobación institucional antes de iniciar el trabajo de campo o de diseño. Se presenta al inicio del ciclo de titulación. El formulario digital del IDC tiene 10 secciones obligatorias. A continuación se explica cada una con ejemplos específicos de Diseño de Modas.</p>
+
+  <h3>1. Título del trabajo</h3>
+  <div class="tip">
+    <strong>Regla de oro:</strong> máximo 25 palabras. Estructura: <em>Verbo de acción + objeto + línea temática + lugar + año</em>.
+  </div>
+  <p>El título debe ser claro, preciso y reflejar la naturaleza innovadora del proyecto. Debe indicar el ámbito de estudio (Diseño de Modas), la tecnología o material aplicado y el contexto geográfico/temporal.</p>
+  <div class="card">
+    <div class="card-title">✅ Ejemplo válido (DM-L1 · Moda sostenible)</div>
+    <div class="card-text">Diseñar una colección de seis prendas sostenibles con materiales upcycled y fibras naturales andinas para el segmento joven femenino de Lima durante el 2026.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">✅ Ejemplo válido (DM-L5 · Tecnología en la moda)</div>
+    <div class="card-text">Desarrollar una propuesta de moda digital mediante realidad aumentada para la experiencia de prueba virtual de prendas en el mercado limeño durante el 2026.</div>
+  </div>
+  <div class="warn tip">
+    <strong>Evite:</strong> títulos en pasado, valoraciones subjetivas ("el mejor", "increíble") o que excedan las 25 palabras.
+  </div>
+
+  <h3>2. Programa de estudios</h3>
+  <p>El sistema bloquea este campo con el valor <strong>Diseño de Modas</strong>. Usted debe completar:</p>
+  <ul>
+    <li><strong>Semestre / Año de egreso:</strong> ej. 2026-I, 2026-II.</li>
+    <li><strong>Año de presentación:</strong> generalmente 2026.</li>
+  </ul>
+
+  <h3>3. Línea de investigación y línea transversal</h3>
+  <p>Seleccione <strong>una</strong> de las cinco líneas DM y <strong>una o más</strong> líneas transversales institucionales. Esta elección condiciona los objetivos, la metodología y los entregables.</p>
+  <table>
+    <tr><th>Código</th><th>Línea de investigación</th><th>Producto principal esperado</th></tr>
+    <tr><td>DM-L1</td><td>Moda sostenible y reciclaje textil</td><td>Colección física + cuaderno de diseño + lookbook</td></tr>
+    <tr><td>DM-L2</td><td>Innovación textil</td><td>Prototipo textil + ficha técnica + análisis de viabilidad</td></tr>
+    <tr><td>DM-L3</td><td>Diseño de moda inclusivo</td><td>Colección adaptada + fitting real + evaluación ergonómica</td></tr>
+    <tr><td>DM-L4</td><td>Tendencias y consumo responsable</td><td>Cuaderno de tendencias + colección cápsula + informe de impacto</td></tr>
+    <tr><td>DM-L5</td><td>Tecnología en la moda</td><td>Prenda digital / wearable / filtro AR + test de usabilidad</td></tr>
+  </table>
+
+  <h3>4. Integrantes y asesor</h3>
+  <p>Puede trabajar <strong>individualmente</strong>, en <strong>pares</strong> (mismo programa) o en <strong>grupos de hasta 4</strong> si es multidisciplinario. Por cada integrante registre:</p>
+  <ul>
+    <li>Número de matrícula</li>
+    <li>Apellidos y nombres completos</li>
+    <li>Teléfono celular</li>
+    <li>Correo institucional (@idc.edu.pe)</li>
+  </ul>
+  <div class="tip">
+    <strong>Importante:</strong> El asesor debe ser un docente del programa o un especialista validado por la Coordinación (Mg. Fany Picón Tejedo). Incluya su nombre completo y DNI.
+  </div>
+
+  <h3>5. Formulación del problema</h3>
+  <p>Consta de un <strong>problema general</strong> (pregunta central) y <strong>problemas específicos</strong> (desagregados del general). Cada problema específico debe orientar un objetivo específico.</p>
+  <div class="card">
+    <div class="card-title">Problema general (DM-L3 · Moda inclusiva)</div>
+    <div class="card-text">¿De qué manera el diseño de una colección de moda inclusiva para personas con discapacidad motora puede mejorar su autonomía vestimentaria y autoestima en el distrito de San Isidro, Lima, durante el 2026?</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Problemas específicos</div>
+    <div class="card-text">
+      <p><strong>PE1:</strong> ¿Cuáles son las barreras funcionales y estéticas que enfrentan las personas con discapacidad motora al vestirse?</p>
+      <p><strong>PE2:</strong> ¿Qué sistemas de cierre y adaptaciones ergonómicas permiten una mayor autonomía en el vestir?</p>
+      <p><strong>PE3:</strong> ¿Cómo evaluar la usabilidad y aceptación estética de la colección propuesta?</p>
+    </div>
+  </div>
+
+  <h3>6. Objetivos</h3>
+  <p>El Plan se redacta en <strong>tiempo prospectivo (futuro)</strong>. Use verbos en infinitivo o formas como "se diseñará", "se implementará", "se validará". Evite el pasado.</p>
+  <table>
+    <tr><th>Nivel cognitivo</th><th>Verbos sugeridos</th><th>Uso en Diseño de Modas</th></tr>
+    <tr><td>Conocimiento</td><td>Identificar, Describir, Enumerar</td><td>Revisión bibliográfica, benchmarking de marcas</td></tr>
+    <tr><td>Comprensión</td><td>Explicar, Interpretar, Comparar</td><td>Análisis de tendencias, comportamiento del consumidor</td></tr>
+    <tr><td>Aplicación</td><td>Diseñar, Ejecutar, Construir, Desarrollar</td><td>Patronaje, confección, prototipado</td></tr>
+    <tr><td>Análisis</td><td>Analizar, Clasificar, Descomponer</td><td>Desglose de costos, análisis de viabilidad textil</td></tr>
+    <tr><td>Síntesis</td><td>Proponer, Formular, Integrar, Planear</td><d>Propuesta de modelo de negocio, plan de lanzamiento</td></tr>
+  </table>
+  <div class="card">
+    <div class="card-title">Objetivo general (DM-L2 · Innovación textil)</div>
+    <div class="card-text">Desarrollar una propuesta de moda innovadora para el segmento deportivo de alto rendimiento que integre tejidos con microcápsulas termorreguladoras en la confección de prendas, durante el 2026.</div>
+  </div>
+
+  <h3>7. Justificación (4 criterios)</h3>
+  <p>Toda justificación debe responder a estas cuatro preguntas guía. El asesor las usará como rúbrica de evaluación.</p>
+  <div class="card">
+    <div class="card-title">🔹 Trascendencia</div>
+    <div class="card-text">¿A quién beneficia? ¿Qué impacto social, cultural o económico tiene? <br><em>Ejemplo:</em> El proyecto reduce el impacto ambiental de la industria textil (10% de emisiones globales) y revaloriza fibras andinas, generando empleo en comunidades rurales.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">🔹 Magnitud</div>
+    <div class="card-text">¿Qué tan grande o urgente es el problema? Use datos estadísticos. <br><em>Ejemplo:</em> El 68% de las prendas en Perú se desecha antes de 5 usos; el 42% de jóvenes limeños prefiere marcas sostenibles verificables.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">🔹 Vulnerabilidad</div>
+    <div class="card-text">¿Es posible resolverlo desde las competencias del programa? <br><em>Ejemplo:</em> El programa de Diseño de Modas forma en patronaje, confección y gestión de colecciones, competencias directamente aplicables.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">🔹 Factibilidad</div>
+    <div class="card-text">¿Con qué recursos cuenta? <br><em>Ejemplo:</em> Talleres de patronaje del IDC, proveedores de Gamarra/Mesa Redonda, presupuesto estimado de S/ 1,500 y asesoría del Mg. Mario Quiroz.</div>
+  </div>
+
+  <h3>8. Descripción técnica</h3>
+  <p>Máximo <strong>300 palabras</strong>. Incluya: (a) tipo de proyecto, (b) metodología o proceso de diseño, (c) fases de trabajo, (d) herramientas/técnicas, (e) entregables esperados.</p>
+  <div class="ok tip">
+    <strong>Consejo:</strong> Redacte en futuro. Especifique números: cantidad de prendas, técnicas exactas (zero-waste, upcycling, impresión 3D), software (CLO3D, Illustrator) y formato de entregables (lookbook, fichas técnicas, manual).
+  </div>
+
+  <h3>9. Cronograma de actividades</h3>
+  <p>Resuma las fases principales. Adjunte el <strong>Diagrama de Gantt</strong> como Apéndice A. Use MS Project, Excel o herramientas gratuitas como GanttProject.</p>
+  <div class="placeholder">
+Fase 1 – Investigación de materiales y benchmarking (semanas 1–4)<br>
+Fase 2 – Cuaderno de diseño y selección de materiales (semanas 5–8)<br>
+Fase 3 – Patronaje, tizado y confección de prototipos (semanas 9–14)<br>
+Fase 4 – Lookbook, validación y presentación final (semanas 15–20)
+  </div>
+
+  <h3>10. Presupuesto y referencias</h3>
+  <p>Desagregue por categorías: recursos humanos, materiales, equipos/software, impresión, transporte y contingencias (10%).</p>
+  <p>Las <strong>referencias bibliográficas</strong> deben estar en orden alfabético según APA 7.ª edición. Use el generador de referencias del IDC y pegue una por línea en el campo correspondiente.</p>
+</section>
+
+<!-- ==================== PARTE 2 ==================== -->
+<section class="section" id="parte2">
+  <div class="eyebrow">Parte 2</div>
+  <h2>Del Plan al Informe Final: desarrollo de la suficiencia profesional</h2>
+  <p>El <strong>Informe del PAP</strong> es el segundo instrumento para titularse. Tiene un mínimo de <strong>50 hojas</strong> y se redacta en <strong>tiempo pasado</strong> (ya se ejecutó el proyecto). A continuación se articula la estructura del informe con las etapas del método de investigación e innovación tecnológica de la Guía del IDC.</p>
+
+  <h3>Estructura del Informe Final (8.1 a 8.12)</h3>
+  <table>
+    <tr><th>Sección</th><th>Contenido clave</th><th>Consejo para Diseño de Modas</th></tr>
+    <tr><td>8.1 Portada</td><td>Título, autores, programa, asesor, año</td><td>Igual que el Plan, pero en pasado si ya se concluyó</td></tr>
+    <tr><td>8.2 Agradecimientos</td><td>Reconocimientos institucionales y personales</td><td>Incluya a proveedores de telas, modelos y jurados</td></tr>
+    <tr><td>8.3 Resumen Ejecutivo</td><td>~300 palabras: problema, método, resultados, conclusiones</td><td>Mencione el número de prendas, técnica innovadora y % de material reciclado</td></tr>
+    <tr><td>8.4 Introducción</td><td>Contexto, justificación, objetivos</td><td>Contextualice dentro de la economía naranja peruana</td></tr>
+    <tr><td>8.5 Marco Teórico</td><td>Antecedentes, bases teóricas, definiciones</td><td>Incluya teorías de moda sostenible, ergonomía, fashion tech o tendencias según la línea</td></tr>
+    <tr><td>8.6 Metodología</td><td>Tipo, enfoque, técnicas, instrumentos</td><td>Especifique: diseño experimental, mixto, juicio de expertos, test de usuario</td></tr>
+    <tr><td>8.7 Desarrollo del Proyecto</td><td>Fases: planificación, conceptualización, producción, evaluación</td><td>Documente con fotografías del proceso: bocetos, swatches, fitting, desfile</td></tr>
+    <tr><td>8.8 Resultados</td><td>Datos, estadísticas, evidencias visuales</td><td>Tablas de medidas, costos, encuestas de percepción, métricas de engagement</td></tr>
+    <tr><td>8.9 Evaluación y Análisis</td><td>Comparación objetivos vs. resultados</td><td>Use el método hipotético-deductivo: ¿se cumplió la hipótesis de diseño?</td></tr>
+    <tr><td>8.10 Conclusiones</td><td>Respuesta al problema, aportes, limitaciones</td><td>Relacione con las líneas transversales institucionales</td></tr>
+    <tr><td>8.11 Recomendaciones</td><td>Acciones futuras y mejoras</td><td>Propuesta de escalamiento, línea comercial o patente</td></tr>
+    <tr><td>8.12 Referencias</td><td>APA 7.ª edición, mínimo 15 fuentes</td><td>Combine fuentes académicas (Hernández, Fletcher) y sectoriales (WGSN, GfK)</td></tr>
+  </table>
+
+  <h3>Etapas del proyecto según la Guía de Investigación</h3>
+  <p>La Guía del IDC establece etapas que deben quedar documentadas en el Capítulo III (Desarrollo):</p>
+  <ol>
+    <li><strong>Identificación del problema:</strong> Diagnóstico del sector textil, entrevistas a usuarios, revisión de literatura sobre moda sostenible/inclusiva/tech.</li>
+    <li><strong>Revisión bibliográfica:</strong> Mínimo 15 fuentes (últimos 5 años salvo clásicos). Use bases de datos académicas y reportes de tendencias (WGSN, Trendalytics).</li>
+    <li><strong>Formulación de hipótesis:</strong> "El uso de patronaje zero-waste reduce el desperdicio de tela en un 15% sin afectar la estética de la prenda."</li>
+    <li><strong>Metodología:</strong> Defina si es investigación aplicada, I+D o innovación tecnológica. Para moda, lo más común es <em>investigación aplicada</em> (resuelve un problema específico) o <em>I+D</em> (desarrolla un nuevo material/proceso).</li>
+    <li><strong>Ejecución:</strong> Cuaderno de diseño → patronaje → confección → lookbook → validación.</li>
+    <li><strong>Evaluación:</strong> Contraste objetivos vs. resultados. Use encuestas, juicio de expertos, análisis de costos.</li>
+    <li><strong>Presentación de resultados:</strong> Informe escrito + sustentación oral + exposición física de la colección.</li>
+  </ol>
+
+  <h3>Tipos de investigación en Diseño de Modas</h3>
+  <div class="card">
+    <div class="card-title">Investigación Aplicada</div>
+    <div class="card-text">Orientada a resolver problemas concretos. <em>Ejemplo:</em> Mejorar la funcionalidad de prendas para personas con discapacidad motora mediante cierres magnéticos adaptados.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Investigación de Desarrollo (I+D)</div>
+    <div class="card-text">Crea o mejora productos/procesos. <em>Ejemplo:</em> Desarrollar un tejido híbrido de alpaca reciclada con PET que mantenga propiedades térmicas y sea biodegradable.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Innovación Tecnológica</div>
+    <div class="card-text">Integra ciencia y tecnología para un beneficio social. <em>Ejemplo:</em> Diseñar un wearable con sensores de temperatura integrados en fibra conductora para monitoreo deportivo.</div>
+  </div>
+
+  <h3>Metodologías sugeridas por línea</h3>
+  <table>
+    <tr><th>Línea</th><th>Enfoque principal</th><th>Técnicas recomendadas</th></tr>
+    <tr><td>DM-L1 Sostenible</td><td>Mixto (cuantitativo + cualitativo)</td><td>Benchmarking, análisis de ciclo de vida, encuestas de percepción, validación con jurado</td></tr>
+    <tr><td>DM-L2 Innovación textil</td><td>Cualitativo / Experimental</td><td>Pruebas de laboratorio (swatches), juicio de expertos textiles, análisis de costos</td></tr>
+    <tr><td>DM-L3 Inclusivo</td><td>Cualitativo / Participativo</td><td>Entrevistas etnográficas, observación, fitting real, test de usabilidad</td></tr>
+    <tr><td>DM-L4 Tendencias</td><td>Mixto / Prospectivo</td><td>Coolhunting, análisis de pasarelas, encuestas a consumidores, scenario planning</td></tr>
+    <tr><td>DM-L5 Fashion Tech</td><td>Mixto / Experimental</td><td>Prototipado digital (CLO3D), test SUS de usabilidad, benchmarking de plataformas</td></tr>
+  </table>
+</section>
+
+<!-- ==================== PARTE 3 ==================== -->
+<section class="section" id="parte3">
+  <div class="eyebrow">Parte 3</div>
+  <h2>Las 5 líneas de investigación de Diseño de Modas</h2>
+  <p>Cada línea define el producto principal, los elementos técnicos, las tipologías y la metodología. Elija la línea que mejor se alinee con su interés profesional y el impacto que busca generar.</p>
+
+  <h3>DM-L1 · Moda sostenible y reciclaje textil</h3>
+  <p><strong>Sector:</strong> Industria textil, emprendimientos de moda sostenible, comercio justo, exportación de moda ética.</p>
+  <ul>
+    <li><strong>Producto:</strong> Colección física de 4–8 prendas.</li>
+    <li><strong>Materiales:</strong> Algodón GOTS, PET reciclado, lana reciclada, alpaca, algodón nativo, fibras de bambú.</li>
+    <li><strong>Técnicas:</strong> Upcycling, zero-waste pattern, slow fashion, circular fashion.</li>
+    <li><strong>Entregables:</strong> Fashion sketchbook, tabla de materiales con certificaciones (GOTS, OEKO-TEX, GRS), fichas técnicas de prenda, lookbook editorial.</li>
+    <li><strong>Validación:</strong> Encuesta de percepción a 30+ consumidores, presentación ante jurado especializado.</li>
+  </ul>
+
+  <h3>DM-L2 · Innovación textil</h3>
+  <p><strong>Sector:</strong> Manufactura de confecciones, moda técnica/deportiva, artesanía textil tecnificada.</p>
+  <ul>
+    <li><strong>Producto:</strong> Prototipo textil o prenda con material/técnica innovadora.</li>
+    <li><strong>Innovaciones:</strong> Materiales inteligentes, biomateriales (kombucha, piña, algas), impresión 3D textil, corte láser, serigrafía digital.</li>
+    <li><strong>Entregables:</strong> Ficha técnica del material, registro fotográfico de experimentación (swatches), análisis de viabilidad técnica y comercial.</li>
+    <li><strong>Validación:</strong> Juicio de expertos textiles, test de usuario, análisis de escalabilidad productiva.</li>
+  </ul>
+
+  <h3>DM-L3 · Diseño de moda inclusivo</h3>
+  <p><strong>Sector:</strong> Moda adaptada para PCD (CONADIS), moda plus size, ropa laboral inclusiva, gerontomoda.</p>
+  <ul>
+    <li><strong>Producto:</strong> Colección adaptada para un perfil específico (motora, visual, sensorial, diversidad corporal).</li>
+    <li><strong>Adaptaciones:</strong> Cierres de fácil manejo (velcro, magnéticos), rangos de movimiento amplios, tallaje inclusivo, estética sin señalización.</li>
+    <li><strong>Entregables:</strong> Estudio ergonómico, fitting con usuarios reales, lookbook inclusivo, informe de accesibilidad.</li>
+    <li><strong>Validación:</strong> Test de usabilidad con usuarios del grupo objetivo, revisión de normativa CONADIS.</li>
+  </ul>
+
+  <h3>DM-L4 · Tendencias y consumo responsable</h3>
+  <p><strong>Sector:</strong> Consultoría de moda, bureaux de tendencias, marcas de moda mediana y alta.</p>
+  <ul>
+    <li><strong>Producto:</strong> Cuaderno de tendencias (trend book) + colección cápsula de 5–8 prendas.</li>
+    <li><strong>Metodología:</strong> Análisis de macrotendencias (STEEP), coolhunting en Lima, revisión de pasarelas (WGSN, Trendalytics).</li>
+    <li><strong>Entregables:</strong> Moodboard, paleta cromática, siluetas proyectadas, colección cápsula aplicada, informe de consumo responsable.</li>
+    <li><strong>Validación:</strong> Validación con expertos en tendencias, encuesta de aceptación del concepto.</li>
+  </ul>
+
+  <h3>DM-L5 · Tecnología en la moda</h3>
+  <p><strong>Sector:</strong> Fashion tech, e-commerce de moda, plataformas de moda digital, gaming y metaverso.</p>
+  <ul>
+    <li><strong>Producto:</strong> Prenda digital, wearable, filtro AR de prueba virtual o lookbook interactivo.</li>
+    <li><strong>Tecnologías:</strong> CLO3D, Marvelous Designer, filtros AR (Snap/Meta), NFT de moda, impresión 3D.</li>
+    <li><strong>Entregables:</strong> Archivos 3D, renders, prototipo funcional (wearable), test de usabilidad SUS, propuesta de modelo de negocio digital.</li>
+    <li><strong>Validación:</strong> Test de usabilidad con 15–20 usuarios, juicio de expertos en fashion tech, métricas de engagement.</li>
+  </ul>
+</section>
+
+<!-- ==================== PARTE 4 ==================== -->
+<section class="section" id="parte4">
+  <div class="eyebrow">Parte 4</div>
+  <h2>Metodología, normativa y formato APA 7</h2>
+
+  <h3>Métodos de investigación aplicables</h3>
+  <p>Según la Guía del IDC, el proyecto de moda puede aplicar los siguientes métodos:</p>
+  <div class="card">
+    <div class="card-title">Método Hipotético-Deductivo</div>
+    <div class="card-text">Formule una hipótesis de diseño y valídela mediante experimentación controlada. <br><em>Ejemplo:</em> "El uso de patronaje zero-waste reduce el desperdicio de tela en un 15% sin afectar la estética." → Mida el desperdicio de prototipos tradicionales vs. zero-waste.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Método Inductivo</div>
+    <div class="card-text">Observe casos particulares para construir teorías generales. <br><em>Ejemplo:</em> Analice 10 marcas de moda sostenible peruanas exitosas para identificar patrones comunes en su modelo de negocio.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">Análisis y Síntesis</div>
+    <div class="card-text"><strong>Análisis:</strong> Descomponga una prenda en sus elementos (tela, corte, costura, acabado) para evaluar cada componente. <br><strong>Síntesis:</strong> Integre tendencias, materiales e innovaciones en una colección coherente.</div>
+  </div>
+
+  <h3>Formato inamovible APA 7</h3>
+  <table>
+    <tr><th>Parámetro</th><th>Especificación</th><th>Observación</th></tr>
+    <tr><td>Tipo de letra</td><td>Times New Roman</td><td>Todo el documento</td></tr>
+    <tr><td>Tamaño</td><td>12 puntos</td><td>Cuerpo del texto</td></tr>
+    <tr><td>Interlineado</td><td>1.5 líneas</td><td>Excepto notas al pie</td></tr>
+    <tr><td>Alineación</td><td>Justificada</td><td>Todos los párrafos</td></tr>
+    <tr><td>Sangría</td><td>Tabulador (5 espacios / 35.4 pt)</td><td>Primer línea de cada párrafo</td></tr>
+    <tr><td>Papel</td><td>Bond A4 · 80 g</td><td>Para entrega física empastada</td></tr>
+    <tr><td>Margen izquierdo</td><td>30–35 mm</td><td>Mayor por el empaste</td></tr>
+    <tr><td>Margen derecho</td><td>15–20 mm</td><td>Estándar de lectura</td></tr>
+    <tr><td>Márgenes superior e inferior</td><td>25 mm</td><td>Para encabezado y pie</td></tr>
+    <tr><td>Numeración preliminar</td><td>i, ii, iii…</td><td>Desde dedicatoria hasta introducción</td></tr>
+    <tr><td>Numeración cuerpo</td><td>1, 2, 3…</td><td>Desde Capítulo I hasta referencias</td></tr>
+    <tr><td>Citación</td><td>APA 7.ª edición</td><td>Autor, año, p. página</td></tr>
+  </table>
+
+  <h3>Jerarquía de encabezados APA 7</h3>
+  <table>
+    <tr><th>Nivel</th><th>Formato</th><th>Uso en el informe</th></tr>
+    <tr><td>Nivel 1</td><td>Centrado, negrita, mayúsculas y minúsculas</td><td>CAPÍTULO I. PLANTEAMIENTO DEL PROBLEMA</td></tr>
+    <tr><td>Nivel 2</td><td>Alineado a la izquierda, negrita, mayúsculas y minúsculas</td><td>1.1. Antecedentes de la investigación</td></tr>
+    <tr><td>Nivel 3</td><td>Con sangría, negrita, mayúscula inicial y punto final.</td><td>Marco teórico de la moda sostenible.</td></tr>
+    <tr><td>Nivel 4</td><td>Con sangría, negrita, cursiva, mayúscula inicial y punto final.</td><td><em>Fast fashion</em> y su impacto ambiental.</td></tr>
+    <tr><td>Nivel 5</td><td>Con sangría, cursiva, mayúscula inicial y punto final.</td><td><em>Upcycling</em> como estrategia de circularidad.</td></tr>
+  </table>
+
+  <h3>Apéndices obligatorios y recomendados</h3>
+  <p>En el Informe Final, los apéndices <strong>A, B y C son obligatorios</strong>. Los demás se recomiendan según el alcance.</p>
+  <table>
+    <tr><th>Apéndice</th><th>Contenido</th><th>Obligatorio</th></tr>
+    <tr><td>A</td><td>Cronograma de actividades (Diagrama de Gantt)</td><td>Sí</td></tr>
+    <tr><td>B</td><td>Cronograma de presupuesto valorizado</td><td>Sí</td></tr>
+    <tr><td>C</td><td>Planos y materiales técnicos (moodboards, storyboards, planos de patronaje)</td><td>Sí</td></tr>
+    <tr><td>D</td><td>Instrumentos de recolección (encuestas, guías de entrevista)</td><td>Recomendado</td></tr>
+    <tr><td>E</td><td>Consentimientos informados</td><td>Recomendado</td></tr>
+    <tr><td>F</td><td>Registro fotográfico del proceso</td><td>Recomendado</td></tr>
+    <tr><td>G</td><td>Fichas técnicas de materiales</td><td>Recomendado</td></tr>
+    <tr><td>H</td><td>Brief creativo o del cliente</td><td>Si aplica</td></tr>
+    <tr><td>I</td><td>Validación de expertos (fichas firmadas)</td><td>Recomendado</td></tr>
+    <tr><td>J</td><td>Otros materiales complementarios</td><td>Opcional</td></tr>
+  </table>
+</section>
+
+<!-- ==================== PARTE 5 ==================== -->
+<section class="section" id="parte5">
+  <div class="eyebrow">Parte 5</div>
+  <h2>Checklist de validación antes de la entrega</h2>
+  <p>Revise punto por punto antes de enviar el Plan o el Informe a la Coordinación del Programa (Mg. Fany Picón Tejedo) y a la Jefatura de la Unidad de Investigación (Mg. Mario Quiroz).</p>
+
+  <h3>Checklist del Plan del PAP</h3>
+  <ul class="checklist">
+    <li>El título no excede las 25 palabras e incluye verbo, objeto, línea, lugar y año.</li>
+    <li>Los problemas (general y específicos) están redactados como preguntas.</li>
+    <li>Los objetivos usan verbos en infinitivo en tiempo prospectivo (futuro).</li>
+    <li>La justificación responde a los 4 criterios: trascendencia, magnitud, vulnerabilidad y factibilidad.</li>
+    <li>La descripción técnica no supera las 300 palabras y especifica entregables concretos.</li>
+    <li>El cronograma incluye fases realistas para un semestre académico.</li>
+    <li>El presupuesto está desagregado y incluye contingencias (10%).</li>
+    <li>Las referencias están en orden alfabético y siguen APA 7.ª edición.</li>
+    <li>Constan los datos completos de todos los integrantes y del asesor.</li>
+    <li>Se ha seleccionado una línea de investigación DM y al menos una línea transversal.</li>
+  </ul>
+
+  <h3>Checklist del Informe Final</h3>
+  <ul class="checklist">
+    <li>Mínimo 50 hojas (sin contar preliminares ni apéndices).</li>
+    <li>Redactado en tiempo pasado (ya se ejecutó el proyecto).</li>
+    <li>Incluye portada, agradecimientos, resumen ejecutivo (~300 palabras), introducción, marco teórico, metodología, desarrollo, resultados, evaluación, conclusiones, recomendaciones y referencias.</li>
+    <li>Los apéndices A, B y C están completos.</li>
+    <li>Mínimo 15 referencias bibliográficas (antigüedad máxima 5 años salvo clásicos).</li>
+    <li>Formato APA 7: Times New Roman 12, interlineado 1.5, justificado, sangría tabulador.</li>
+    <li>Numeración correcta: romanos en preliminares, arábigos desde Capítulo I.</li>
+    <li>Evidencia visual del proceso: fotografías de bocetos, materiales, confección y validación.</li>
+    <li>Los resultados cuantitativos (encuestas, costos, tiempos) están tabulados y analizados.</li>
+    <li>Las conclusiones responden directamente al problema general y a los objetivos.</li>
+  </ul>
+
+  <div class="ok tip" style="margin-top:2rem">
+    <strong>Último consejo:</strong> El éxito del PAP no solo depende de la calidad del diseño, sino de la <strong>rigurosidad metodológica</strong>. Documente cada decisión de diseño con argumentos basados en datos, citas académicas y retroalimentación de usuarios. La innovación en moda se mide tanto por la belleza de la prenda como por la solidez del proceso que la originó.
+  </div>
+</section>
+
+<footer style="text-align:center; padding:3rem 1rem; color:var(--gris); font-size:.85rem; border-top:1px solid var(--gris-medio)">
+  <p><strong>Instituto de Educación Superior Público "Diseño y Comunicación" (IDC)</strong></p>
+  <p>Coordinación del Programa de Estudios de Diseño de Modas · Mg. Fany Picón Tejedo</p>
+  <p>Jefatura de la Unidad de Investigación · Mg. Mario Quiroz Martinez</p>
+  <p style="margin-top:.5rem; opacity:.7">Lima, Perú · 2026 · Memorando Múltiple Nº 05/JUI/IDC/2025-II</p>
+</footer>
+
+</div>
+</body>
+</html>
